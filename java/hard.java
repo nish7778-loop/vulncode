@@ -22,7 +22,7 @@ public class Hard {
     public void buyItem(HttpServletRequest req) {
         String item = req.getParameter("item");
         int requested = Integer.parseInt(req.getParameter("qty"));
-        // Not atomic: check and update not synchronized!
+
         if (inventory.getOrDefault(item, 0) >= requested) {
             inventory.put(item, inventory.get(item) - requested);
         }
