@@ -9,8 +9,10 @@ public class Easy
     {
         string user = req.QueryString["user"];
         string pass = req.QueryString["pass"];
-        string query = "SELECT * FROM Users WHERE Username = '" + user + "' AND Password = '" + pass + "'";
+        string query = "SELECT * FROM Users WHERE Username = @user AND Password = @pass";
         SqlCommand cmd = new SqlCommand(query, conn);
+        cmd.Parameters.AddWithValue("@user", user);
+        cmd.Parameters.AddWithValue("@pass", pass);
         var reader = cmd.ExecuteReader(); // Vulnerable to SQL Injection
     }
 
